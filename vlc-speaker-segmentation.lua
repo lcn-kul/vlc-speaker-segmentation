@@ -1,11 +1,11 @@
 
 function descriptor()
 	return {
-		title = "Speaker Segmentation",
+		title = "VLC Speaker Segmentation",
 		version = "1.0",
 		author = "btamm12",
 		description = [[
-Speaker segmentation annotation generates timestamps that can be copied anywhere.
+Generate speaker segmentation timestamps that can be copied anywhere.
 ]],
 		capabilities = {"menu"},
 	}
@@ -62,37 +62,36 @@ end
 
 function click_clear()
 	local input=vlc.object.input()
-	local result = Time2string(vlc.var.get(input,"time"))
+	local result = time2str(vlc.var.get(input,"time"))
 	if input then textinput_time:set_text("") end
 end
 
 
 function click_speech_start()
 	local input=vlc.object.input()
-	local result = Time2string(vlc.var.get(input,"time"))
+	local result = time2str(vlc.var.get(input,"time"))
 	local cur_text = textinput_time:get_text()
+	local starting_text = remove_last_start(cur_text)
 	local to_append = ""
-	if cur_text == "" then
+	if starting_text == "" then
 		to_append = result .. "-"
-	elseif string.sub(cur_text, -1) == "-" then
-		to_append = ""
 	else
-		to_append = ", " .. result .. "-"
+		to_append = ", " .. result .. "-"		
 	end
-	if input then textinput_time:set_text(cur_text .. to_append) end
+	if input then textinput_time:set_text(starting_text .. to_append) end
 end
 
 function click_speech_stop()
 	local input=vlc.object.input()
-	local result = Time2string(vlc.var.get(input,"time"))
+	local result = time2str(vlc.var.get(input,"time"))
 	local cur_text = textinput_time:get_text()
-	local starting_text = RemoveLast(cur_text)
+	local starting_text = remove_last_stop(cur_text)
 	if input then textinput_time:set_text(starting_text .. result) end
 end
 
 
 
-function Time2string(timestamp)
+function time2str(timestamp)
 	local currentMillis = timestamp/1000
 	local currentSeconds = currentMillis/1000
 	local currentMinutes = currentSeconds/60
@@ -107,7 +106,22 @@ function Time2string(timestamp)
 	return timeString
 end
 
-function RemoveLast(s)
+function remove_last_start(s)
+	local result, last, j, k
+	result, last = string.match(s,'(.*)(, .*-)$')
+	if result then
+		return result
+	else
+		j,k = string.match(s,'(.*-)(.*)')
+		if k == "" then
+			return ""
+		else
+			return s
+		end
+	end
+end
+
+function remove_last_stop(s)
 	local result, last, j, k
 	result, last = string.match(s,'(.*-)(.*)')
 	j,k = string.find(last, ",", 1)
@@ -117,4 +131,3 @@ function RemoveLast(s)
 		return result
 	end
 end
-
