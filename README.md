@@ -4,8 +4,7 @@
 
 VLC Speaker Segmentation is a VLC extension for speaker segmentation annotations.
 
-https://user-images.githubusercontent.com/32679237/211171740-d6f54791-311e-4cf6-b621-33f9ea126bcc.mp4
-
+https://user-images.githubusercontent.com/32679237/217255077-0f2a96af-8f9f-447a-973b-749a703b6d46.mp4
 
 ## 2. Installation
 
