@@ -12,10 +12,10 @@ https://user-images.githubusercontent.com/32679237/217255077-0f2a96af-8f9f-447a-
 2. Download the [lua extension](vlc-speaker-segmentation.lua).
 3. Locate the VLC extension directory.
    - Common Windows locations:
-     - `C:\Users\UserName\AppData\Roaming\vlc\lua\extensions`
+     - `C:\Users\[UserName]\AppData\Roaming\vlc\lua\extensions`
    - Common Linux locations:
-     - `/home/username/snap/vlc/curent/.local/share/vlc/lua/extensions`
-     - `/home/username/.local/share/vlc/lua/extensions`
+     - `/home/[username]/snap/vlc/curent/.local/share/vlc/lua/extensions`
+     - `/home/[username]/.local/share/vlc/lua/extensions`
    - If you are having trouble, it may help to install a random extension from inside the VLC application.
      - On the menu bar "Tools" > "Plugins and extensions".
      - In "Addons Manager" tab, select the "Extensions" pane.
